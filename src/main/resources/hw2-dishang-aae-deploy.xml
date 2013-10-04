@@ -1,0 +1,18 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDeploymentDescription 
+  xmlns="http://uima.apache.org/resourceSpecifier">
+  
+  <name>hw2-dishang-aae-deploy</name>
+  <description>Deploys HW2 Aggregate Analysis Engine.</description>
+  
+  <deployment protocol="jms" provider="activemq">
+    <service>
+      <inputQueue endpoint="Hw2AAEQueue" brokerURL="tcp://DISHAN-PC:61616"/>
+      <topDescriptor>
+       <import location="hw2-dishang-aae.xml"/> 
+      </topDescriptor>
+    </service>
+  </deployment>
+
+</analysisEngineDeploymentDescription>

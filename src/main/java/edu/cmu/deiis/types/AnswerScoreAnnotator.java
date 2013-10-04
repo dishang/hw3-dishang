@@ -8,6 +8,7 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.jcas.JCas;
+import org.cleartk.ne.type.NamedEntityMention;
 
 public class AnswerScoreAnnotator  extends JCasAnnotator_ImplBase {
 
@@ -75,6 +76,14 @@ public class AnswerScoreAnnotator  extends JCasAnnotator_ImplBase {
      ansTrigrams.retainAll(quesTrigrams) ;
      
      answerScore = (double) ((double) ansUnigrams.size()*1.0/numUnigrams + (double) ansBigrams.size()*2.0/numBigrams + (double) ansTrigrams.size()*3.0/numTrigrams) ;
+     
+     
+     /*FSIndex namedEntityIndex = aJCas.getAnnotationIndex(NamedEntityMention.type);
+     Iterator nemIter = namedEntityIndex.iterator(); 
+     while (nemIter.hasNext()) {
+       NamedEntityMention nem = (NamedEntityMention) nemIter.next();
+       System.out.println(nem.getMentionType()) ;
+     }*/
      
      AnswerScore annotation = new AnswerScore (aJCas) ;
      annotation.setBegin(begin) ;

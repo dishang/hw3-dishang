@@ -21,6 +21,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/uimaj-examples"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
