@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>  <annotatorImplementationName>edu.cmu.deiis.types.AnswerScoreAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>AnswerScoreAnnotator</name>
+    <description>Annotates the computed score (using N-Gram overlap) for each answer.</description>
+    <version>1.0</version>
+    <vendor>Dishan Gupta</vendor>
+    <configurationParameters/>
+    <configurationParameterSettings/>
+    <typeSystemDescription>
+      <imports>
+        <import name="descriptors.deiis_types"/>
+      </imports>
+      <types>
+        <typeDescription>
+          <name>edu.cmu.deiis.types.NGram</name>
+          <description>Type NGram to annotate NGrams in the text document.</description>
+          <supertypeName>edu.cmu.deiis.types.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+          <name>edu.cmu.deiis.types.Question</name>
+          <description>Type Question to annotate the Question in the text document.</description>
+          <supertypeName>edu.cmu.deiis.types.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+          <name>edu.cmu.deiis.types.Answer</name>
+          <description>Type Answer to annotate the answers in the text document.</description>
+          <supertypeName>edu.cmu.deiis.types.Annotation</supertypeName>
+        </typeDescription>
+        <typeDescription>
+          <name>edu.cmu.deiis.types.AnswerScore</name>
+          <description>Type AnswerScore to annotate the computed scores associated with each answer in the text document.</description>
+          <supertypeName>edu.cmu.deiis.types.Annotation</supertypeName>
+        </typeDescription>
+      </types>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">edu.cmu.deiis.types.Question</type>
+          <type allAnnotatorFeatures="true">edu.cmu.deiis.types.NGram</type>
+          <type allAnnotatorFeatures="true">edu.cmu.deiis.types.Answer</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.cmu.deiis.types.AnswerScore</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+  <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>

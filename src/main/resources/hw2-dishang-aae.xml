@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>false</primitive>  
+  <delegateAnalysisEngineSpecifiers>
+    <delegateAnalysisEngine key="AnswerAnnotator">
+      <import name="AnswerAnnotator"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="QuestionAnnotator">
+      <import name="QuestionAnnotator"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="TokenUniGramAnnotator">
+      <import name="TokenUniGramAnnotator"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="TokenBiGramAnnotator">
+      <import name="TokenBiGramAnnotator"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="TokenTriGramAnnotator">
+      <import name="TokenTriGramAnnotator"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="AnswerScoreAnnotator">
+      <import name="AnswerScoreAnnotator"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="Evaluator">
+      <import name="Evaluator"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="TokenAnnotator">
+      <import name="TokenAnnotator"/>
+    </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="scnlp-dishang-client">
+      <import location="scnlp-dishang-client.xml"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+  <analysisEngineMetaData>
+    <name>hw2-dishang-aae</name>
+    <description>The Aggregate AE for the processing pipeline.</description>
+    <version>1.0</version>
+    <vendor>Dishan Gupta</vendor>
+    <configurationParameters/>
+    <configurationParameterSettings/>
+    <flowConstraints>
+      <fixedFlow>
+        <node>TokenAnnotator</node>
+        <node>QuestionAnnotator</node>
+        <node>AnswerAnnotator</node>
+        <node>TokenUniGramAnnotator</node>
+        <node>TokenBiGramAnnotator</node>
+        <node>TokenTriGramAnnotator</node>
+        <node>scnlp-dishang-client</node>
+        <node>AnswerScoreAnnotator</node>
+      <node>Evaluator</node>
+      </fixedFlow>
+    </flowConstraints>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.cmu.deiis.types.Question</type>
+          <type allAnnotatorFeatures="true">edu.cmu.deiis.types.AnswerScore</type>
+          <type allAnnotatorFeatures="true">edu.cmu.deiis.types.Answer</type>
+          <type allAnnotatorFeatures="true">edu.cmu.deiis.types.Evaluate</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+  <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>

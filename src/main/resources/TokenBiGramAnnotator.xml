@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>  <annotatorImplementationName>edu.cmu.deiis.types.TokenBiGramAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>TokenBiGramAnnotator</name>
+    <description>Annotates bigram tokens in the text document.</description>
+    <version>1.0</version>
+    <vendor>Dishan Gupta</vendor>
+    <configurationParameters/>
+    <configurationParameterSettings/>
+    <typeSystemDescription>
+      <imports>
+        <import name="descriptors.deiis_types"/>
+      </imports>
+      <types>
+        <typeDescription>
+          <name>edu.cmu.deiis.types.NGram</name>
+          <description>Type NGram for annotating NGrams in the text document.</description>
+          <supertypeName>uima.tcas.Annotation</supertypeName>
+        </typeDescription>
+      </types>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs>
+          <type allAnnotatorFeatures="true">edu.cmu.deiis.types.NGram</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+  <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>
