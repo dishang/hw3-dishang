@@ -6,83 +6,11 @@
   <deployment protocol="jms" provider="activemq">
     <casPool numberOfCASes="1" initialFsHeapSize="2000000"/>
     <service>
-      <inputQueue endpoint="QASystem" brokerURL="tcp://localhost:61616" prefetch="0"/>
+      <inputQueue endpoint="QASystem" brokerURL="tcp://DISHAN-PC:61616" prefetch="0"/>
       <topDescriptor>
-<import location="./hw2-dishang-aae.xml"/>
+			<import location="./hw2-dishang-aae.xml"/>
       </topDescriptor>
-      <analysisEngine async="true">
-        <scaleout numberOfInstances="1"/>
-        <delegates>
-          <analysisEngine key="AnswerScoreAnnotator" async="false">
-            <scaleout numberOfInstances="1"/>
-            <asyncAggregateErrorConfiguration>
-              <getMetadataErrors maxRetries="0" timeout="0" errorAction="terminate"/>
-              <processCasErrors maxRetries="0" timeout="0" continueOnRetryFailure="false" thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
-              <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
-            </asyncAggregateErrorConfiguration>
-          </analysisEngine>
-          <analysisEngine key="TokenAnnotator" async="false">
-            <scaleout numberOfInstances="1"/>
-            <asyncAggregateErrorConfiguration>
-              <getMetadataErrors maxRetries="0" timeout="0" errorAction="terminate"/>
-              <processCasErrors maxRetries="0" timeout="0" continueOnRetryFailure="false" thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
-              <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
-            </asyncAggregateErrorConfiguration>
-          </analysisEngine>
-          <analysisEngine key="TokenUniGramAnnotator" async="false">
-            <scaleout numberOfInstances="1"/>
-            <asyncAggregateErrorConfiguration>
-              <getMetadataErrors maxRetries="0" timeout="0" errorAction="terminate"/>
-              <processCasErrors maxRetries="0" timeout="0" continueOnRetryFailure="false" thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
-              <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
-            </asyncAggregateErrorConfiguration>
-          </analysisEngine>
-          <analysisEngine key="TokenBiGramAnnotator" async="false">
-            <scaleout numberOfInstances="1"/>
-            <asyncAggregateErrorConfiguration>
-              <getMetadataErrors maxRetries="0" timeout="0" errorAction="terminate"/>
-              <processCasErrors maxRetries="0" timeout="0" continueOnRetryFailure="false" thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
-              <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
-            </asyncAggregateErrorConfiguration>
-          </analysisEngine>
-          <analysisEngine key="TokenTriGramAnnotator" async="false">
-            <scaleout numberOfInstances="1"/>
-            <asyncAggregateErrorConfiguration>
-              <getMetadataErrors maxRetries="0" timeout="0" errorAction="terminate"/>
-              <processCasErrors maxRetries="0" timeout="0" continueOnRetryFailure="false" thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
-              <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
-            </asyncAggregateErrorConfiguration>
-          </analysisEngine>
-          <analysisEngine key="QuestionAnnotator" async="false">
-            <scaleout numberOfInstances="1"/>
-            <asyncAggregateErrorConfiguration>
-              <getMetadataErrors maxRetries="0" timeout="0" errorAction="terminate"/>
-              <processCasErrors maxRetries="0" timeout="0" continueOnRetryFailure="false" thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
-              <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
-            </asyncAggregateErrorConfiguration>
-          </analysisEngine>
-          <analysisEngine key="AnswerAnnotator" async="false">
-            <scaleout numberOfInstances="1"/>
-            <asyncAggregateErrorConfiguration>
-              <getMetadataErrors maxRetries="0" timeout="0" errorAction="terminate"/>
-              <processCasErrors maxRetries="0" timeout="0" continueOnRetryFailure="false" thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
-              <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
-            </asyncAggregateErrorConfiguration>
-          </analysisEngine>
-          <analysisEngine key="Evaluator" async="false">
-            <scaleout numberOfInstances="1"/>
-            <asyncAggregateErrorConfiguration>
-              <getMetadataErrors maxRetries="0" timeout="0" errorAction="terminate"/>
-              <processCasErrors maxRetries="0" timeout="0" continueOnRetryFailure="false" thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
-              <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
-            </asyncAggregateErrorConfiguration>
-          </analysisEngine>
-        </delegates>
-        <asyncPrimitiveErrorConfiguration>
-          <processCasErrors thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
-          <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
-        </asyncPrimitiveErrorConfiguration>
-      </analysisEngine>
+      
     </service>
   </deployment>
 </analysisEngineDeploymentDescription>

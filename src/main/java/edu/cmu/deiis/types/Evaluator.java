@@ -19,29 +19,49 @@ public class Evaluator extends JCasAnnotator_ImplBase{
     
     //Compute precision @ N
     
-    int numCorrect  = 0 , rankCorrect = 0 ;
-    double precision = 0.0 ;
-    Answer[] answers ;
+    int numCorrect  = 0 , rankCorrect = 0, rankCorrectNE = 0 ;
+    double precision = 0.0, precisionNE = 0.0 ;
+    Answer[] answers, answersNE ;
     Map<Answer, Double> answerScoreMap = new HashMap<Answer,Double> () ;
+    Map<Answer, Double> answerScoreMapNE = new HashMap<Answer,Double> () ;
     
     FSIndex answerScoreIndex = aJCas.getAnnotationIndex(AnswerScore.type) ;
     Iterator answerScoreIter = answerScoreIndex.iterator();
     while(answerScoreIter.hasNext()){
       AnswerScore answerScore = (AnswerScore) answerScoreIter.next();
-      answerScoreMap.put(answerScore.getAnswer(), answerScore.getScore()) ;
-      if(answerScore.getAnswer().getIsCorrect())
-        numCorrect = numCorrect + 1 ;
+      if(answerScore.getCasProcessorId().matches("AnswerScoreAnnotator")){
+        answerScoreMap.put(answerScore.getAnswer(), answerScore.getScore()) ;
+        if(answerScore.getAnswer().getIsCorrect())
+          numCorrect = numCorrect + 1 ;
+      }
+      else
+        answerScoreMapNE.put(answerScore.getAnswer(), answerScore.getScore()) ;
     }
     answers = answerScoreMap.keySet().toArray(new Answer[0]) ;
     Arrays.sort(answers, new AnswerComparator (answerScoreMap)) ;
+    
+    answersNE = answerScoreMapNE.keySet().toArray(new Answer[0]) ;
+    Arrays.sort(answersNE, new AnswerComparator (answerScoreMapNE)) ;
     
     for (int i = 0; i < numCorrect ; i ++){
       if (answers[i].getIsCorrect())
         rankCorrect = rankCorrect + 1 ;
       System.out.println(answers[i].getCoveredText() + " , " + answerScoreMap.get(answers[i])) ;
+      
     }
-     
+    
     precision = (double) (rankCorrect*1.0/numCorrect) ;
+    System.out.println("\nPrecision Score:" + precision + "\n") ;
+    
+    for (int i = 0; i < numCorrect ; i ++){
+      if (answersNE[i].getIsCorrect())
+        rankCorrectNE = rankCorrectNE + 1 ;
+      System.out.println(answersNE[i].getCoveredText() + " , " + answerScoreMapNE.get(answersNE[i])) ;
+    } 
+    
+    
+    precisionNE = (double) (rankCorrectNE*1.0/numCorrect) ;
+    System.out.println("\nPrecision Score NE:" + precisionNE + "\n") ;
     
     Evaluate annotation = new Evaluate (aJCas) ;
     annotation.setBegin(0) ;
@@ -51,8 +71,14 @@ public class Evaluator extends JCasAnnotator_ImplBase{
     annotation.setConfidence(1.0) ;
     annotation.addToIndexes() ;
     
+    annotation = new Evaluate (aJCas) ;
+    annotation.setBegin(0) ;
+    annotation.setEnd(aJCas.getDocumentText().length()) ;
+    annotation.setPrecision(precisionNE) ;
+    annotation.setCasProcessorId("EvaluatorNE") ;
+    annotation.setConfidence(1.0) ;
+    annotation.addToIndexes() ;
     
-    System.out.println(precision) ;
   }
   
   private static class AnswerComparator implements Comparator<Answer> {
